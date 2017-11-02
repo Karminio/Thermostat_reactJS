@@ -15,7 +15,8 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-bootstrap": "^0.31.5",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "react-router": "4.2.0"
   },
   "scripts": {
     "dev": "webpack -d --watch",

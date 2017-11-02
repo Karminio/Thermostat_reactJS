@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import { Route } from 'react-router';
+
 
 
 const io = require('socket.io-client')  
@@ -88,7 +85,6 @@ class SetTempButton extends React.Component {
 
 function TempDisplay(props){
   return <div>
-  <PageHeader>Thermostat <small>Current temperatures</small></PageHeader>
     <Panel header="Living Room">
       <h1>{props.temp.tempSala}°C</h1>
     </Panel>
@@ -104,31 +100,6 @@ function TempDisplay(props){
   </div>
 }
 
-
-function NavbarInstance(props) {
-  return <Navbar inverse fluid fixedTop collapseOnSelect>
-      <Navbar.Header>
-    <Navbar.Brand>
-      <a href="#">React-Bootstrap</a>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-  <Navbar.Collapse>
-    <Nav>
-      <NavItem eventKey={1} href="#">Link</NavItem>
-      <NavItem eventKey={2} href="#">Link</NavItem>
-      <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-        <MenuItem eventKey={3.1}>Action</MenuItem>
-        <MenuItem eventKey={3.2}>Another action</MenuItem>
-        <MenuItem eventKey={3.3}>Something else here</MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={3.3}>Separated link</MenuItem>
-      </NavDropdown>
-    </Nav>
-  </Navbar.Collapse>
-  </Navbar>
-};
-
 class ThermoComponent extends React.Component {
 
   constructor(props) {
@@ -138,36 +109,11 @@ class ThermoComponent extends React.Component {
 
     socket.on('temps', (data) => {
       if(data) {
-          var html = '';
-
-          html += 'Esterna: ' + data.tempExt + '°C ' + data.trendExt + '<br />';
-          html += 'Dani: ' + data.tempDani + '°C ' + data.trendDani + '<br />';
-          html += 'Anna & Leo: ' + data.tempAnnaLeo + '°C ' + data.trendAnnaLeo + '<br />';
-          html += 'Sala: ' + data.tempSala + '°C ' + data.trendSala + '<br />';
-          /*html += 'Minima int.: ' + data.min + '°C<br />';
-          html += 'Massima int.: ' + data.max + '°C<br />';
-          html += 'Minima ext: ' + data.minExt + '°C<br />';
-          html += 'Massima est.: ' + data.maxExt + '°C<br />';*/
-          html += 'U. accensione: ' + data.lastHeatingOn + '<br />';
-          if(data.heating){
-              html += '<b>Heating ON</b>';
-          }
-          if(data.manualRun){
-              html += '<b>Manual run ON</b>';
-          }
-          if(data.paused){
-              html += '<b>Paused</b>';
-          }
-          if(data.testMode){
-              html += '<b>+++TEST+++</b>';
-          }
-          console.log(html);
-          console.log('Temps received at ' + (new Date()).toLocaleTimeString());
+          this.updateTempsFromSockets(data);
       } else {
           console.log('There is a problem getting temps');
       }
-
-      this.updateTempsFromSockets(data);
+  
     });
 
     this.state = {
@@ -189,7 +135,6 @@ class ThermoComponent extends React.Component {
   render() {
     return (
       <div>
-        <NavbarInstance />
         <TempDisplay temp={this.state.currentTemps} />
       </div>
     );
