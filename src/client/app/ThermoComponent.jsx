@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
-import { Route } from 'react-router';
-
 
 
 const io = require('socket.io-client')  
@@ -118,10 +116,10 @@ class ThermoComponent extends React.Component {
 
     this.state = {
       currentTemps : {
-        tempDani : 19.2,
-        tempAnnaLeo : 21.4,
-        tempSala : 11.8,
-        tempExt : 12.7,
+        tempDani : 0,
+        tempAnnaLeo : 0,
+        tempSala : 0,
+        tempExt : 0,
       },
       targetTemps: [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
       zones: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
