@@ -36,7 +36,7 @@ function pingLocalServer(){
 }
 
 function StatDisplay(props){
-  return <div>
+  return <div className="displayCanvas">
     <Panel header="Average External">
       <h1>{props.temp.avgExt}°C</h1>
     </Panel>
@@ -45,6 +45,15 @@ function StatDisplay(props){
     </Panel>
     <Panel header="Maximum External">
       <h1>{props.temp.maxExt}°C</h1>
+    </Panel>
+    <Panel header="Minutes ran last 2h">
+      <h1>{props.temp.minutes2h}</h1>
+    </Panel>
+    <Panel header="Minutes ran last 12h">
+      <h1>{props.temp.minutes12h}</h1>
+    </Panel>
+    <Panel header="Minutes ran last 24h">
+      <h1>{props.temp.minutes24h}</h1>
     </Panel>
   </div>
 }
@@ -66,7 +75,10 @@ class StatsComponent extends React.Component {
             stats : {
                 avgExt : 15,
                 minExt : 15,
-                maxExt : 15
+                maxExt : 15,
+                minutes2h: 0,
+                minutes12h: 0,
+                minutes24h: 0
             }    
         };
 
@@ -79,6 +91,9 @@ class StatsComponent extends React.Component {
         tempStats.avgExt = data[3].avgExt;
         tempStats.minExt = data[3].minExt;
         tempStats.maxExt = data[3].maxExt;
+        tempStats.minutes2h = data[0].minutes;
+        tempStats.minutes12h = data[1].minutes;
+        tempStats.minutes24h = data[2].minutes;
 
         this.setState({stats: tempStats})
     }  

@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 
+import TempSetComp from './TempSetComp.jsx';
+
 
 const io = require('socket.io-client')  
 var socket = getSocket();
@@ -82,7 +84,8 @@ class SetTempButton extends React.Component {
 };
 
 function TempDisplay(props){
-  return <div>
+  return <div className="displayCanvas">
+
     <Panel header="Living Room">
       <h1>{props.temp.tempSala}°C</h1>
     </Panel>
@@ -95,6 +98,7 @@ function TempDisplay(props){
     <Panel header="External">
       <h1>{props.temp.tempExt}°C</h1>
     </Panel>
+    
   </div>
 }
 
