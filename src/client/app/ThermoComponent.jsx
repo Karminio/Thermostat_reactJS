@@ -98,7 +98,7 @@ function TempDisplay(props){
     <Panel header="External">
       <h1>{props.temp.tempExt}°C</h1>
     </Panel>
-    
+
   </div>
 }
 

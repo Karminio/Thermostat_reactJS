@@ -33,8 +33,8 @@ class TempSetComp extends React.Component {
                         <h1>{this.props.temp}°C</h1>
                     </Col>
                     <Col xs={2} md={2}>
-                                    <h3>{this.state.setTemp}°C</h3>
-                                    </Col>
+                        <h3>{this.state.setTemp}°C</h3>
+                    </Col>
                     <Col xs={2} md={2}>
                      <ButtonGroup >
                         <Button bsSize="small" onClick={() => this.decreaseSetTemp()}>-</Button>
